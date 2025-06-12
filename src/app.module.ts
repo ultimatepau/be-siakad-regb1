@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksService } from './tasks/tasks.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -23,11 +25,12 @@ import { EmailModule } from './email/email.module';
       entities: [Mahasiswa],
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     MahasiswaModule,
     MatakuliahModule,
     EmailModule,
   ],
   controllers: [AppController, MatakuliahController],
-  providers: [AppService, MatakuliahService],
+  providers: [AppService, MatakuliahService, TasksService],
 })
 export class AppModule {}
