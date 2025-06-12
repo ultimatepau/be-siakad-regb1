@@ -5,18 +5,25 @@ import { Repository } from 'typeorm';
 import { Mahasiswa } from './entities/mahasiswa.entity';
 import { CreateMahasiswaDto } from './dto/create-mahasiswa.dto';
 import { UpdateMahasiswaDto } from './dto/update-mahasiswa.dto';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class MahasiswaService {
   constructor(
     @InjectRepository(Mahasiswa)
     private readonly repo: Repository<Mahasiswa>,
+    private readonly emailService: EmailService,
   ) {}
   private data: Mahasiswa[] = [];
 
   async create(dto: CreateMahasiswaDto): Promise<Mahasiswa> {
     const mhs = this.repo.create(dto);
-    return this.repo.save(mhs);
+    const saved = await this.repo.save(mhs);
+
+    // Kirim email (simulasi)
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    this.emailService.sendRegistrationEmail(saved.email, saved.nama); // tanpa await
+    return saved;
   }
 
   findAll(): Promise<Mahasiswa[]> {
