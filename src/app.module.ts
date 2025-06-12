@@ -8,6 +8,7 @@ import { Mahasiswa } from './mahasiswa/entities/mahasiswa.entity';
 import { MatakuliahController } from './matakuliah/matakuliah.controller';
 import { MatakuliahService } from './matakuliah/matakuliah.service';
 import { MatakuliahModule } from './matakuliah/matakuliah.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { MatakuliahModule } from './matakuliah/matakuliah.module';
     }),
     MahasiswaModule,
     MatakuliahModule,
+    EmailModule,
   ],
   controllers: [AppController, MatakuliahController],
   providers: [AppService, MatakuliahService],
