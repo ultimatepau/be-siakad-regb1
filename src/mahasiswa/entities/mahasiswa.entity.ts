@@ -1,14 +1,22 @@
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
 export class Mahasiswa {
-  constructor(
-    public nim: string,
-    public nama: string,
-    public prodi: string,
-    public angkatan: number,
-    public email: string,
-  ) {
-    this.nim = nim;
-  }
-  getDisplayName(): string {
-    return `${this.nama} ${this.nim}`;
-  }
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ unique: true })
+  nim: string;
+
+  @Column()
+  nama: string;
+
+  @Column()
+  prodi: string;
+
+  @Column()
+  angkatan: number;
+
+  @Column()
+  email: string;
 }
